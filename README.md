@@ -42,9 +42,11 @@ Proyecto_Final/
 │   ├── 03_BCRP_PRECIO_COBRE_MENSUAL_2007_2024.xlsx
 │   └── cobre_procesado.csv
 ├── figures/
-│   └── collage_graficos.png
+│   ├── collage_graficos.png
+│   └── grafico_final.png
 ├── scripts/
-│   └── EDA.R
+│   ├── EDA.R
+│   └── 04_analisis_final.R
 └── README.md
 ```
 
@@ -54,6 +56,8 @@ Proyecto_Final/
    de trabajo.
 2. Ejecutar `scripts/EDA.R`. El script importa los datos, los limpia, calcula
    las estadísticas descriptivas y genera el collage en `figures/`.
+3. Ejecutar `scripts/04_analisis_final.R` para reproducir el análisis final y el
+   gráfico `figures/grafico_final.png`.
 
 ## Principales hallazgos del EDA
 
@@ -64,3 +68,30 @@ Proyecto_Final/
   internacional, y una recuperación posterior.
 - Desde 2021 el precio se mantiene en niveles altos, cerrando 2024 con un
   promedio anual de 415 ¢US$/lb.
+
+## Análisis final (Parte 2)
+
+**Pregunta:** ¿El precio del cobre subió de forma sostenida entre 2007 y 2024, o
+su comportamiento responde más a ciclos y shocks que a una tendencia lineal?
+
+Para responderla se midió la relación entre el tiempo y el precio con la
+correlación de Pearson y una regresión lineal simple (`precio ~ tiempo`), y se
+calculó la volatilidad mensual de cada año. El script `scripts/04_analisis_final.R`
+reutiliza la base procesada en el EDA y genera `figures/grafico_final.png`.
+
+**Resultados:**
+
+- La correlación entre el tiempo y el precio es débil (**0.275**), y el modelo
+  lineal explica apenas el **7.5%** de la variación del precio (R² = 0.075).
+- La pendiente estimada es de **+3.7 ¢US$/lb por año**.
+- De punta a punta el precio creció **+28.1%** (promedio de 323.6 en 2007 frente a
+  414.6 en 2024).
+- El año más volátil fue **2008** (crisis financiera internacional), seguido de
+  2007 y 2010.
+
+**Conclusión:** el precio del cobre sí registró un alza neta en el periodo
+(+28%), pero **no describe una tendencia lineal sostenida**. La baja capacidad
+explicativa del modelo lineal y la alta volatilidad de años como 2008 muestran
+que su dinámica está gobernada por **ciclos y shocks** —la caída de 2008-2009, el
+retroceso de 2015-2016 y el fuerte repunte desde 2021— más que por un crecimiento
+constante en el tiempo.
